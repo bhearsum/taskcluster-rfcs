@@ -1,3 +1,5 @@
+- todo: add taskcluster.yml metadata somewhere
+
 # RFC 182 - Allow remote references to .taskcluster.yml files processed by Taskcluster-GitHub
 * Comments: [#182](https://github.com/taskcluster/taskcluster-rfcs/pull/182)
 * Proposed by: @bhearsum
@@ -14,12 +16,12 @@ Allowing a `.taskcluster.yml` to reference a file stored elsewhere will allow fo
 
 # Details
 
-Two new variables will be introduced to `.taskcluster.yml` files. The first, `config-from`, will allow an URL to be provided that points at a full-fledged `.taskcluster.yml` hosted elsewhere. The second, `context`, will allow for variables to be defined that will be included with the JSON-e context when the referenced `.taskcluster.yml` is rendered. Here is an example of a possible concrete `.taskcluster.yml`:
+Two new variables will be introduced to `.taskcluster.yml` files. The first, `config-from`, will allow a reference to a different GitHub repository to be provided that points at a full-fledged `.taskcluster.yml` hosted elsewhere. This reference may be pinned to a specific revision, or to a tag or branch name. The second, `context`, will allow for variables to be defined that will be included with the JSON-e context when the referenced `.taskcluster.yml` is rendered. Here is an example of a possible concrete `.taskcluster.yml`:
 
 ```
 ---
 version: 1
-config-from: https://github.com/taskcluster/taskgraph/blob/main/data/taskcluster-yml-github.yml
+config-from: github.com/taskcluster/taskgraph/data/taskcluster-yml-github.yml@main
 context:
   project-name: mozillavpn
   scopes:
